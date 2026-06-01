@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hôtellerie & Restauration - Poupette ❤️</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(rgba(255, 229, 236, 0.5), rgba(255, 194, 209, 0.5)), 
+                        url('fond.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 10px;
+            color: #4a4a4a;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.93);
+            border-radius: 25px;
+            padding: 30px 20px;
+            box-shadow: 0 12px 35px rgba(251, 111, 146, 0.25);
+            border: 2px solid rgba(255, 143, 171, 0.3);
+            position: relative;
+            text-align: center;
+        }
+
+        /* --- BOUTON RETOUR EN HAUT À GAUCHE --- */
+        .btn-back-top {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #ff4d6d;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+        .btn-back-top:hover {
+            transform: scale(1.1);
+            background: #ff758f;
+        }
+
+        /* --- EN-TÊTE DU MENU --- */
+        .menu-header {
+            margin-bottom: 25px;
+            border-bottom: 2px dashed #ff8fab;
+            padding-bottom: 15px;
+        }
+
+        .menu-title {
+            color: #fb6f92;
+            font-size: 2rem;
+            font-family: 'Georgia', serif;
+            letter-spacing: 1px;
+        }
+
+        .menu-subtitle {
+            font-style: italic;
+            color: #ff758f;
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+
+        /* --- SECTION CHEF --- */
+        .chef-section {
+            background: rgba(255, 229, 236, 0.4);
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        /* --- SECTION PLATS ET RECETTES --- */
+        .dish-card {
+            background: white;
+            border: 1px solid rgba(255, 143, 171, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: left;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+
+        .dish-name {
+            color: #fb6f92;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dish-price {
+            font-size: 1rem;
+            color: #ff4d6d;
+            font-family: 'Georgia', serif;
+        }
+
+        .dish-description {
+            font-size: 0.95rem;
+            line-height: 1.4;
+            margin-bottom: 12px;
+            color: #666;
+        }
+
+        .recipe-box {
+            background: #fff5f7;
+            border-left: 3px solid #ff8fab;
+            padding: 10px 12px;
+            border-radius: 0 10px 10px 0;
+            font-size: 0.9rem;
+        }
+
+        .recipe-title {
+            font-weight: bold;
+            color: #ff4d6d;
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+        }
+
+        .recipe-steps {
+            list-style-type: none;
+            padding-left: 5px;
+        }
+
+        .recipe-steps li {
+            margin-bottom: 4px;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .recipe-steps li::before {
+            content: "🍳";
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 0.8rem;
+        }
+
+        /* --- FOOTER DE LA CARTE --- */
+        .menu-footer {
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: #ff8fab;
+            font-weight: bold;
+            border-top: 2px dashed #ff8fab;
+            padding-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="messagerie.html" class="btn-back-top">⬅</a>
+
+    <div class="container">
+        
+        <div class="menu-header">
+            <h1 class="menu-title">La Carte Étoilée ✨</h1>
+            <p class="menu-subtitle">Spécial 20 ans de la Chef Poupette</p>
+        </div>
+
+        <div class="chef-section">
+            "À celle qui transforme chaque ingrédient en magie, qui maîtrise l'art de la restauration et de l'accueil à la perfection. Voici le menu secret de tes plats d'amour préférés..."
+        </div>
+
+        <div class="dish-card">
+            <div class="dish-name">
+                <span>Le Fameux Attiéké Poisson 🐟</span>
+                <span class="dish-price">20/20</span>
+            </div>
+            <p class="dish-description">
+                Le plat incontournable, toujours préparé avec passion, amour et cette petite touche unique qui me fait craquer à chaque fois.
+            </p>
+            <div class="recipe-box">
+                <p class="recipe-title">La Recette Secrète :</p>
+                <ul class="recipe-steps">
+                    <li>Un poisson assaisonné avec tout ton savoir-faire d'experte.</li>
+                    <li>Un attiéké bien chaud, léger et parfaitement dosé.</li>
+                    <li>Le piment secret et le piquant de notre complicité.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="dish-card">
+            <div class="dish-name">
+                <span>Les Indomie Spécial Nigeria 🍜</span>
+                <span class="dish-price">⭐ Étoilé</span>
+            </div>
+            <p class="dish-description">
+                Revisité façon Grand Restaurant par la Chef. Un pur délice réconfortant pour nos soirées et nos moments de discussion.
+            </p>
+            <div class="recipe-box">
+                <p class="recipe-title">Ingrédients d'Amour :</p>
+                <ul class="recipe-steps">
+                    <li>Des nouilles cuisinées avec la précision d'une pro de la restauration.</li>
+                    <li>Des légumes frais, des œufs et une tonne de tendresse.</li>
+                    <li>À déguster à deux, les yeux dans les yeux.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="menu-footer">
+            Chef Recommandé : Service et Amour Garantis à Vie ❤️
+        </div>
+
+    </div>
+
+</body>
+</html>
