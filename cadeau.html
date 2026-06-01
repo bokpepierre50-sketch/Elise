@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pour Tes 20 ans Poupette ❤️</title>
+    <style>
+        * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    /* Intégration de la photo en arrière-plan */
+    background: linear-gradient(rgba(255, 229, 236, 0.45), rgba(255, 194, 209, 0.45)), 
+                url('photo_poupette.jpg.png') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+    text-align: center;
+}
+
+  /* --- BOUTON RETOUR EN HAUT À GAUCHE --- */
+        .btn-back-top {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: #ff4d6d;
+            padding: 8px 14px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            z-index: 10;
+            text-decoration: none;
+            
+            /* Changement ici : le bouton est invisible et dort en arrière-plan */
+            opacity: 0;
+            pointer-events: none; 
+        }
+
+        /* Quand cette classe est ajoutée par le JavaScript, le bouton apparaît magiquement */
+        .btn-back-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .btn-back-top:hover {
+            background: #ff4d6d;
+            color: white;
+            transform: scale(1.1);
+        }
+
+.container {
+    width: 90%;
+    max-width: 450px;
+    padding: 20px;
+    z-index: 2;
+}
+
+/* --- ÉCRAN 1 : LE CADEAU À CLIQUER --- */
+#gift-screen {
+    display: flex; /* Reste en flex au départ */
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 30px 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    animation: fadeIn 0.5s ease forwards;
+}
+
+h1 {
+    color: #fb6f92;
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.gift-box {
+    font-size: 100px;
+    cursor: pointer;
+    display: inline-block;
+    transition: transform 0.3s ease;
+    animation: bounce 2s infinite;
+}
+
+.gift-box:hover {
+    transform: scale(1.1);
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-20px); }
+    60% { transform: translateY(-10px); }
+}
+
+.click-text {
+    margin-top: 20px;
+    color: #ff8fab;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+/* --- BOUTON CHIC "THE TWO OF US" --- */
+        .btn-together {
+            background: linear-gradient(135deg, #ff4d6d, #ff758f); /* Couleurs passion / amour */
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            font-size: 1.15rem;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(255, 77, 109, 0.4);
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none; /* Évite le soulignement */
+        }
+
+        .btn-together:hover {
+            background: linear-gradient(135deg, #ff758f, #ff4d6d);
+            transform: translateY(-3px); /* Petit effet de soulèvement */
+            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.6);
+        }
+
+        .btn-together:active {
+            transform: translateY(-1px);
+        }
+
+/* --- ÉCRAN 2 : LA SURPRISE (BIEN CACHÉ AU DÉBUT) --- */
+#surprise-screen {
+    display: none; /* Bloque l'affichage au chargement de la page */
+    background: rgba(255, 255, 255, 0.92);
+    padding: 30px 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(251, 111, 146, 0.3);
+    animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.main-title {
+    color: #fb6f92;
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+}
+
+.love-letter {
+    color: #4a4a4a;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    font-style: italic;
+}
+
+.btn-love {
+    background-color: #fb6f92;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(251, 111, 146, 0.4);
+    transition: background 0.3s ease;
+}
+
+.btn-love:hover {
+    background-color: #ff8fab;
+}
+
+#compliment-box {
+    margin-top: 20px;
+    min-height: 50px;
+    color: #fb6f92;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: opacity 0.3s ease;
+}
+    </style>
+</head>
+<body>
+    <button id="global-back-btn" class="btn-back-top" onclick="fermerSurprise()">⬅</button>
+<audio id="mon-audio" src="musique.mp3" loop></audio>
+
+    <div class="container">
+        <!-- ÉCRAN 1 : LE CADEAU -->
+        <div id="gift-screen">
+            <h1>Pour Tes 20 ans Poupette ❤️</h1>
+            <div class="gift-box" onclick="ouvrirCadeau()">🎁</div>
+            <p class="click-text">Clique sur le cadeau pour l'ouvrir !</p>
+        
+ <button class="btn-together" onclick="ouvrirLienUnique()">The two of us ✨</button>
+        
+        <!-- ÉCRAN 2 : LA SURPRISE -->
+    </div>
+     <div id="surprise-screen">
+            <h1 class="main-title">🎉 Joyeux Anniversaire ! 🎉</h1>
+            <p class="love-letter">
+                « 20 ans... Quel bel âge pour une personne aussi exceptionnelle que toi, ma poupette. ❤️ Aujourd'hui, je ne te souhaite pas seulement un joyeux anniversaire, je te souhaite de conquérir tes rêves les plus fous. Tu es ma priorité, ma motivation quotidienne, et te voir réussir est ma plus grande fierté. Avance sans peur, car ton ambition n'a pas de limites et ma présence à tes côtés sera toujours une certitude. Que Dieu bénisse tes 20 ans et t'ouvre toutes les portes du succès. Bon anniversaire ma reine ! 👑💍 »
+            </p>
+            
+            <button class="btn-love" onclick="afficherMessage()">Clique ici pour une surprise</button>
+            <div id="compliment-box"></div>
+        </div>
+    </div>
+
+    <script>
+        // Tableau de messages doux qui vont défiler à chaque clic sur le bouton bonus
+        const messages = [
+            "Tu es la plus belle chose qui me soit arrivée. ✨",
+            "J'aime ton sourire et la force que tu me donnes au quotidien. 💪❤️",
+            "Même quand je suis plongé dans mes chantiers ou mon code, tu es dans mes pensées. 🛠️",
+            "Je te promets de toujours donner le meilleur de moi-même pour nous. 🌟",
+            "Aujourd'hui, détends-toi, souris et profite de TA journée. Tu le mérites. 👑"
+        ];
+
+        let indexMessage = 0;
+
+         // 1. FONCTION POUR OUVRIR LE CADEAU
+        function ouvrirCadeau() {
+            const audio = document.getElementById('mon-audio');
+            if (audio) {
+                audio.load();
+                audio.play().catch(error => console.log("Audio en attente :", error));
+            }
+
+            document.getElementById('gift-screen').style.display = 'none';
+            document.getElementById('surprise-screen').style.display = 'block';
+            
+            // On ajoute la classe visible (la flèche apparaît à chaque fois !)
+            document.getElementById('global-back-btn').classList.add('visible'); 
+        }
+ 
+// 2. FONCTION POUR REVENIR EN ARRIÈRE
+        function fermerSurprise() {
+            const audio = document.getElementById('mon-audio');
+            if (audio) {
+                audio.pause();
+                audio.currentTime = 0; 
+            }
+
+            document.getElementById('gift-screen').style.display = 'flex';
+            document.getElementById('surprise-screen').style.display = 'none';
+            
+            // On enlève la classe visible (la flèche disparaît proprement)
+            document.getElementById('global-back-btn').classList.remove('visible'); 
+        }
+
+        // Fonction pour afficher les messages bonus un par un
+        function afficherMessage() {
+            const box = document.getElementById('compliment-box');
+            box.style.opacity = 0; // Petit effet de transition
+            
+            setTimeout(() => {
+                box.innerText = messages[indexMessage];
+                box.style.opacity = 1;
+                
+                // On passe au message suivant, et on recommence au début si on arrive à la fin
+                indexMessage = (indexMessage + 1) % messages.length;
+            }, 200);
+        }
+        function ouvrirLienUnique() {
+    window.location.href = 'messagerie.html';
+}
+
+    </script>
+</body>
+</html>
