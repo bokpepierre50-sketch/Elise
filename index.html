@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- Pour les iPhones -->
+<link rel="apple-touch-icon" href="https://img.icons8.com/fluent/160/000000/hearts.png">
+
+<!-- Pour les téléphones Android (Chrome) -->
+<link rel="icon" type="image/png" sizes="192x192" href="https://img.icons8.com/fluent/160/000000/hearts.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://img.icons8.com/fluent/160/000000/hearts.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identification ❤️</title>
+    <style>
+        body { background: linear-gradient(rgba(255, 229, 236, 0.45), rgba(255, 194, 209, 0.45)); font-family: sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; overflow-y: auto; padding: 10px; } 
+        .card { background: white; padding: 20px; border-radius: 20px; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
+        img { width: 100%; border-radius: 15px; margin-bottom: 15px; }
+        button { background: #ff4d6d; color: white; border: none; padding: 12px 25px; border-radius: 25px; cursor: pointer; font-weight: bold; }
+        #quiz-zone { display: none; margin-top: 15px; }
+        input { width: 80%; padding: 10px; margin: 10px 0; border: 2px solid #ff8fab; border-radius: 10px; }
+
+        @keyframes tomber {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>❤️ AFFATON Anique Mondoukpé Elise ❤️</h2>
+        <!-- Remplace 'fond.jpg' par le nom exact de ton image -->
+        <img src="image.png" alt="Ma Poupette">
+        
+        <button id="btn-start" onclick="document.getElementById('quiz-zone').style.display='block'; this.style.display='none';">IDENTIFIEZ-VOUS 🔐</button>
+        
+        <div id="quiz-zone">
+            <p>Quel est la chose que il aime manger souvent et toi tu n'aime pas ?</p>
+            <input type="text" id="reponse" placeholder="Réponse...">
+            <br>
+            <button class="btn-quiz-valid" onclick="verifierReponse()">Valider</button>
+            <p id="error" style="color:red;"></p>
+        </div>
+    </div>
+
+    <script>
+           function afficherQuestion() {
+            document.getElementById('btn-identif').style.display = 'none';
+            document.getElementById('quiz-zone').style.display = 'block';
+        }
+
+        function creerCoeur() {
+            const coeur = document.createElement('div');
+            coer.innerHTML = '❤️';
+            coeur.style.position = 'fixed';
+            coeur.style.left = Math.random() * 100 + 'vw';
+            coeur.style.top = '-10vh';
+            coeur.style.fontSize = Math.random() * 20 + 20 + 'px';
+            coeur.style.zIndex = '9999';
+            coeur.style.pointerEvents = 'none';
+            coeur.style.animation = 'tomber 3s linear forwards';
+            document.body.appendChild(coeur);
+            setTimeout(() => { coeur.remove(); }, 3000);
+        }
+
+        function verifierReponse() {
+            // On essaie de récupérer par l'ID d'abord
+            let inputReponse = document.getElementById('quiz-answer');
+            
+            // Si l'ID a un problème, on va chercher le tout premier champ de texte de la page
+            if (!inputReponse) {
+                inputReponse = document.querySelector('input[type="text"]');
+            }
+            
+            const messageErreur = document.getElementById('error-message');
+            const reponseSaisie = inputReponse ? inputReponse.value.trim().toLowerCase() : "";
+            
+            // Sécurité : Si le texte est "aborbor" OU si par magie elle clique et que ça bloque, on valide
+            if (reponseSaisie === "aborbor" || reponseSaisie.includes("abor")) {
+                if (messageErreur) messageErreur.innerText = "";
+                
+                // Déclenche la tempête de cœurs !
+                for(let i = 0; i < 60; i++) { 
+                    setTimeout(creerCoeur, i * 40); 
+                }
+                
+                // Redirection après la surprise
+                setTimeout(() => {
+                    window.location.href = 'cadeau.html';
+                }, 2500);
+            } else {
+                if (messageErreur) messageErreur.innerText = "❌ Réponse incorrecte ! Recommence mon amour.";
+                if (inputReponse) inputReponse.value = ""; 
+            }
+        }
+       
+    </script>
+</body>
+</html>
