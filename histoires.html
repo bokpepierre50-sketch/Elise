@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos Histoires ❤️</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(rgba(255, 229, 236, 0.5), rgba(255, 194, 209, 0.5));
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .notebook-container {
+            width: 100%;
+            max-width: 500px;
+            background: #ffffff;
+            border-radius: 25px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+            padding: 25px;
+            border: 2px solid #ffb3c1;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px dashed #ffe5ec;
+            padding-bottom: 10px;
+        }
+
+        .title {
+            color: #ff4d6d;
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+        .btn-back {
+            background: none;
+            border: none;
+            color: #ff758f;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* LISTE DES NOTES (STYLE CARNET) */
+        .notes-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex-grow: 1;
+            overflow-y: auto;
+            max-height: 350px;
+        }
+
+        .note-item {
+            background: #fff5f7;
+            border: 1px solid #ffccd5;
+            padding: 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .note-item:hover {
+            transform: translateX(3px);
+            background: #ffe5ec;
+        }
+
+        .note-item-title {
+            color: #4a4a4a;
+            font-weight: bold;
+            font-size: 1.05rem;
+        }
+
+        .note-item-date {
+            font-size: 0.8rem;
+            color: #a0a0a0;
+        }
+
+        .btn-add-note {
+            background: linear-gradient(135deg, #ff4d6d, #ff758f);
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        /* ÉDITEUR DE NOTE */
+        .note-editor {
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+            flex-grow: 1;
+        }
+
+        .input-title {
+            width: 100%;
+            padding: 10px 15px;
+            border: 2px solid #ffccd5;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            outline: none;
+            color: #ff4d6d;
+        }
+
+        .textarea-wrapper {
+            background: linear-gradient(#ffffff 0%, #ffffff 95%, #ffccd5 96%, #ffccd5 100%);
+            background-size: 100% 32px;
+            border-radius: 15px;
+            padding: 5px;
+            border: 1px solid #ffe5ec;
+        }
+
+        textarea {
+            width: 100%;
+            height: 230px;
+            background: transparent;
+            border: none;
+            line-height: 32px;
+            font-size: 1.1rem;
+            color: #4a4a4a;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            resize: none;
+            outline: none;
+            padding: 0 10px;
+        }
+
+        .editor-actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .btn-save {
+            background: linear-gradient(135deg, #2a9d8f, #264653);
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            width: 50%;
+        }
+
+        .btn-delete {
+            background: #ffccd5;
+            color: #ff4d6d;
+            border: none;
+            padding: 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            width: 25%;
+        }
+
+        .btn-cancel {
+            background: #f4f4f4;
+            color: #666;
+            border: none;
+            padding: 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            width: 25%;
+        }
+
+        .no-notes {
+            text-align: center;
+            color: #a0a0a0;
+            font-style: italic;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="notebook-container">
+        
+        <div id="view-list">
+            <div class="header">
+                <button class="btn-back" onclick="window.location.href='messagerie.html'">⬅️</button>
+                <h2 class="title">Nos Histoires 📖</h2>
+                <div style="font-size: 1.3rem;">✨</div>
+            </div>
+            
+            <div class="notes-list" id="notes-container">
+                <p class="no-notes">Connexion sécurisée au carnet... ⏳</p>
+            </div>
+            
+            <button class="btn-add-note" onclick="ouvrirNouvelleNote()">➕ Écrire une nouvelle page</button>
+        </div>
+
+        <div id="view-editor" class="note-editor">
+            <div class="header">
+                <button class="btn-back" onclick="retourALaListe()">⬅️ Retour</button>
+                <h2 class="title" id="editor-view-title">Nouvelle page 📝</h2>
+            </div>
+
+            <input type="text" id="note-title" class="input-title" placeholder="Titre de la page...">
+            
+            <div class="textarea-wrapper">
+                <textarea id="note-content" placeholder="Écris vos plus beaux moments, secrets ou poèmes ici... ❤️"></textarea>
+            </div>
+
+            <div class="editor-actions">
+                <button class="btn-cancel" onclick="retourALaListe()">Annuler</button>
+                <button class="btn-delete" id="delete-btn" onclick="supprimerCetteNote()">Effacer</button>
+                <button class="btn-save" id="save-btn" onclick="enregistrerLaNote()">Enregistrer ❤️</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+
+    <script>
+        // Vos clés Firebase uniques et sécurisées
+        const firebaseConfig = {
+          apiKey: "AIzaSyDxf2mVhr8MsF33-2AhYA_wChEHtmdHjTc",
+          authDomain: "the-two-of-us-b3501.firebaseapp.com",
+          databaseURL: "https://the-two-of-us-b3501-default-rtdb.europe-west1.firebasedatabase.app",
+          projectId: "the-two-of-us-b3501",
+          storageBucket: "the-two-of-us-b3501.firebasestorage.app",
+          messagingSenderId: "726840963014",
+          appId: "1:726840963014:web:78f2fbdc3547ab2cd6ccc7"
+        };
+
+        // Initialisation du service Firestore
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const collectionHistoires = db.collection("histoires"); 
+
+        let toutesLesNotes = [];
+        let idNoteEnCours = null;
+
+        // ÉCOUTE SYNCHRONISÉE EN TEMPS RÉEL SUR VOS DEUX TÉLÉPHONES
+        collectionHistoires.orderBy("timestamp", "desc").onSnapshot((snapshot) => {
+            toutesLesNotes = [];
+            snapshot.forEach((doc) => {
+                toutesLesNotes.push({
+                    id: doc.id,
+                    ...doc.data()
+                });
+            });
+            afficherListeNotes();
+        }, (error) => {
+            console.error("Erreur d'accès Firestore : ", error);
+            document.getElementById('notes-container').innerHTML = 
+                '<p class="no-notes" style="color: #ff4d6d;">Erreur Firebase. Pense à activer et publier tes règles Firestore en mode public ! 😢</p>';
+        });
+
+        // RECONSTRUIRE L'AFFICHAGE DE LA LISTE
+        function afficherListeNotes() {
+            document.getElementById('view-list').style.display = 'block';
+            document.getElementById('view-editor').style.display = 'none';
+            
+            const conteneur = document.getElementById('notes-container');
+            conteneur.innerHTML = "";
+
+            if (toutesLesNotes.length === 0) {
+                conteneur.innerHTML = '<p class="no-notes">Aucune histoire écrite pour le moment. Appuie sur le bouton en bas pour commencer... ❤️</p>';
+                return;
+            }
+
+            toutesLesNotes.forEach((note) => {
+                const elementHtml = document.createElement('div');
+                elementHtml.className = 'note-item';
+                elementHtml.onclick = function() { chargerNotePourLire(note.id); };
+                
+                elementHtml.innerHTML = `
+                    <div class="note-item-title">${note.titre}</div>
+                    <div class="note-item-date">${note.date}</div>
+                `;
+                conteneur.appendChild(elementHtml);
+            });
+        }
+
+        // PRÉPARER UN NOUVEL ÉCRIT
+        function ouvrirNouvelleNote() {
+            idNoteEnCours = null; 
+            document.getElementById('note-title').value = "";
+            document.getElementById('note-content').value = "";
+            document.getElementById('editor-view-title').innerText = "Nouvelle page 📝";
+            document.getElementById('delete-btn').style.display = 'none'; 
+            
+            document.getElementById('view-list').style.display = 'none';
+            document.getElementById('view-editor').style.display = 'flex';
+        }
+
+        // CHARGER ET REPRENDRE UNE NOTE DE LA BASE
+        function chargerNotePourLire(id) {
+            idNoteEnCours = id;
+            const note = toutesLesNotes.find(n => n.id === id);
+            
+            document.getElementById('note-title').value = note.titre;
+            document.getElementById('note-content').value = note.contenu;
+            document.getElementById('editor-view-title').innerText = "Modifier l'histoire ✍️";
+            document.getElementById('delete-btn').style.display = 'block'; 
+            
+            document.getElementById('view-list').style.display = 'none';
+            document.getElementById('view-editor').style.display = 'flex';
+        }
+
+        // ENREGISTRER DIRECTEMENT DANS TON FIRESTORE
+        function enregistrerLaNote() {
+            const titreSaisi = document.getElementById('note-title').value.trim();
+            const contenuSaisi = document.getElementById('note-content').value.trim();
+
+            if (titreSaisi === "") {
+                alert("Donne un petit titre à ta page avant d'enregistrer ! 😊");
+                return;
+            }
+
+            const boutonSauvegarde = document.getElementById('save-btn');
+            boutonSauvegarde.innerText = "Sauvegarde... ⏳";
+            boutonSauvegarde.disabled = true;
+
+            const dateActuelle = new Date().toLocaleDateString('fr-FR');
+
+            const donneesNote = {
+                titre: titreSaisi,
+                contenu: contenuSaisi,
+                date: dateActuelle,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            if (idNoteEnCours === null) {
+                // Nouvelle écriture
+                collectionHistoires.add(donneesNote)
+                    .then(() => {
+                        boutonSauvegarde.innerText = "Enregistrer ❤️";
+                        boutonSauvegarde.disabled = false;
+                        retourALaListe();
+                    })
+                    .catch(err => {
+                        alert("Erreur d'écriture Firestore : " + err);
+                        boutonSauvegarde.innerText = "Enregistrer ❤️";
+                        boutonSauvegarde.disabled = false;
+                    });
+            } else {
+                // Modification d'une feuille existante
+                collectionHistoires.doc(idNoteEnCours).update(donneesNote)
+                    .then(() => {
+                        boutonSauvegarde.innerText = "Enregistrer ❤️";
+                        boutonSauvegarde.disabled = false;
+                        retourALaListe();
+                    })
+                    .catch(err => {
+                        alert("Erreur de mise à jour Firestore : " + err);
+                        boutonSauvegarde.innerText = "Enregistrer ❤️";
+                        boutonSauvegarde.disabled = false;
+                    });
+            }
+        }
+
+        // RETIRER UNE NOTE DE LA BASE DE DONNÉES COOPERATIVE
+        function supprimerCetteNote() {
+            if (idNoteEnCours !== null) {
+                if (confirm("Es-tu sûr de vouloir jeter définitivement cette feuille ? 🗑️")) {
+                    collectionHistoires.doc(idNoteEnCours).delete()
+                        .then(() => retourALaListe())
+                        .catch(err => alert("Erreur de suppression : " + err));
+                }
+            }
+        }
+
+        function retourALaListe() {
+            document.getElementById('view-list').style.display = 'block';
+            document.getElementById('view-editor').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
